@@ -5,7 +5,7 @@
   },
   "manifest_version": 3,
   "version": "0.1",
-  "description": "Save your robux from buying items!",
+  "description": "Save your robux from purchasing items!",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
