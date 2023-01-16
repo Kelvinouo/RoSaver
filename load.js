@@ -29,25 +29,15 @@ async function notification(title, message) {
 }
 
 function makePurchase(productID, price, sellerID, csrf, dataItemID) {
-    let postData
-    if (dataItemID !== 0) {
-        postData = JSON.stringify({
-            expectedCurrency: 1,
-            expectedPrice: price,
-            expectedSellerId: sellerID,
-            userAssetId: dataItemID
-        })
-    } else {
-        postData = JSON.stringify({
-            expectedCurrency: 1,
-            expectedPrice: price,
-            expectedSellerId: sellerID,
-            expectedPromoId: 0,
-            userAssetId: 0,
-            saleLocationType: "Game",
-            saleLocationId: rsaver_placeid
-        })
-    }
+    let postData = JSON.stringify({
+        expectedCurrency: 1,
+        expectedPrice: price,
+        expectedSellerId: sellerID,
+        expectedPromoId: 0,
+        userAssetId: 0,
+        saleLocationType: "Game",
+        saleLocationId: rsaver_placeid
+    })
     return fetch(
             `https://economy.roblox.com/v1/purchases/products/${productID}?1`, {
                 method: "POST",
@@ -87,7 +77,6 @@ function makePurchase(productID, price, sellerID, csrf, dataItemID) {
     let productID = PurchaseButton.attr("data-product-id")
     let price = PurchaseButton.attr("data-expected-price")
     let sellerID = PurchaseButton.attr("data-expected-seller-id")
-    let userAssetID = PurchaseButton.attr("data-userasset-id")
     let savedRobux = Math.floor(price * 0.4)
 
     let imgSrc = ""
@@ -114,6 +103,8 @@ function makePurchase(productID, price, sellerID, csrf, dataItemID) {
 
     if (type !== "limiteds") {
         robuxContainer.append(`<span class="rsaver-savingRobux">(💰${savedRobux})</span>`)
+    } else {
+        return
     }
 
     $(document.body).on("click", () => {
@@ -124,26 +115,17 @@ function makePurchase(productID, price, sellerID, csrf, dataItemID) {
             confirmButton.remove()
             clone.on("click", (e) => {
                 e.preventDefault()
-                if (type == "limiteds") {
-                    if (confirmButton.text() == "Buy Now") {
-                        makePurchase(productID, price, sellerID, CSRF_Token, userAssetID)
-                            .then((resp) => {
+                if (confirmButton.text() == "Buy Now") {
+                    $("#simplemodal-container").remove()
+                    makePurchase(productID, price, sellerID, CSRF_Token, 0)
+                        .then((resp) => {
+                            console.log(resp)
+                            if (savedRobux !== 0) {
+                                notification("Saved robux from RoSaver!" ,"You saved " + savedRobux + " robux by using RoSaver!")
+                                console.log("sent!")
                                 setTimeout(() => window.location.reload(), 500);
-                            });
-                    }
-                } else {
-                    if (confirmButton.text() == "Buy Now") {
-                        $("#simplemodal-container").remove()
-                        makePurchase(productID, price, sellerID, CSRF_Token, 0)
-                            .then((resp) => {
-                                console.log(resp)
-                                if (savedRobux !== 0) {
-                                    notification("Saved robux from RoSaver!" ,"You saved " + savedRobux + " robux by using RoSaver!")
-                                    console.log("sent!")
-                                    setTimeout(() => window.location.reload(), 500);
-                                }
-                            })
-                    }
+                            }
+                        })
                 }
             })
         }
