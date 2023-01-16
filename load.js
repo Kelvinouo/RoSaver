@@ -78,18 +78,17 @@ function makePurchase(productID, price, sellerID, csrf, dataItemID) {
 
     let PurchaseButton = await waitForElm(".PurchaseButton")
     PurchaseButton = $(PurchaseButton)
-    console.log("init rSaver")
+    console.log("Init RoSaver")
 
     let requireRobux = $(".text-robux-lg")
     let robuxContainer = $(".icon-robux-price-container")
     if (requireRobux.text() === "") return
-    requireRobux = parseInt(requireRobux.text())
 
-    let savedRobux = Math.floor(requireRobux * 0.4)
     let productID = PurchaseButton.attr("data-product-id")
     let price = PurchaseButton.attr("data-expected-price")
     let sellerID = PurchaseButton.attr("data-expected-seller-id")
     let userAssetID = PurchaseButton.attr("data-userasset-id")
+    let savedRobux = Math.floor(price * 0.4)
 
     let imgSrc = ""
     if ($("span.thumbnail-span > img").length > 0) {
