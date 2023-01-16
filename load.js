@@ -28,7 +28,7 @@ async function notification(title, message) {
     })
 }
 
-function makePurchase(productID, price, sellerID, csrf, dataItemID) {
+function makePurchase(productID, price, sellerID, csrf) {
     let postData = JSON.stringify({
         expectedCurrency: 1,
         expectedPrice: price,
