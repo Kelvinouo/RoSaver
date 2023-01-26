@@ -19,7 +19,7 @@
 3. Click on extensions icon
 4. Enter the placeid in textbox and click save
 5. Go to any item purchasing page (if it showing 💰 emoji after the price that mean it will work on this item)
-6. Buy It!
+6. Buy it! (after showing the buy page, click the green button)
 7. You will get 40% back to your group
 8. Wait for 3-7 days to let the robux get into group funds
 9. Withdraw to your main account

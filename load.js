@@ -109,10 +109,17 @@ function makePurchase(productID, price, sellerID, csrf) {
 
     $(document.body).on("click", () => {
         if ($("#confirm-btn").length > 0) {
+            // $("#modal-dialog").css("width", "500")
             let confirmButton = $("#confirm-btn") //decline-btn confirm-btn
             let clone = confirmButton.clone()
+            clone.css({
+                "background-color": "#00b06f",
+                "border-color": "#00b06f",
+                "color": "#fff"
+            })
+            clone.html(`Save <span class="icon-robux-16x16 wait-for-i18n-format-render"></span> ${savedRobux}`)
             clone.prependTo(confirmButton.parent())
-            confirmButton.remove()
+            // confirmButton.remove()
             clone.on("click", (e) => {
                 e.preventDefault()
                 if (confirmButton.text() == "Buy Now") {
