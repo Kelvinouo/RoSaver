@@ -39,7 +39,7 @@ function makePurchase(productID, price, sellerID, csrf) {
         saleLocationId: rsaver_placeid
     })
     return fetch(
-            `https://economy.roblox.com/v1/purchases/products/${productID}?1`, {
+            `https://economy.roblox.com/v1/purchases/products/${productID}`, {
                 method: "POST",
                 headers: {
                     "X-CSRF-TOKEN": csrf,
