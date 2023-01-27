@@ -6,6 +6,10 @@
 </h1>
 
 <p align="center">
+<a href="https://chrome.google.com/webstore/detail/rosaver/ohipjedcccbnmbmnadcgpakeebpcdpgb"><img src="https://user-images.githubusercontent.com/585534/107280622-91a8ea80-6a26-11eb-8d07-77c548b28665.png" alt="Get AltBlox for Chrome"></a>
+</p>
+
+<p align="center">
     Save 40% of robux from purchase items on Roblox!
 </p>
 
