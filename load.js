@@ -111,12 +111,17 @@ function makePurchase(productID, price, sellerID, csrf) {
         if ($("#confirm-btn").length > 0) {
             // $("#modal-dialog").css("width", "500")
             let confirmButton = $("#confirm-btn") //decline-btn confirm-btn
+
+            if (confirmButton.offsetParent()[0].toString() == "[object HTMLHtmlElement]") return
+
+            console.log("clone")
             let clone = confirmButton.clone()
             clone.css({
                 "background-color": "#00b06f",
                 "border-color": "#00b06f",
                 "color": "#fff"
             })
+            clone.addClass("rsaver")
             clone.html(`Save <span class="icon-robux-16x16 wait-for-i18n-format-render"></span> ${savedRobux}`)
             clone.prependTo(confirmButton.parent())
             // confirmButton.remove()
