@@ -127,7 +127,7 @@ function makePurchase(productID, price, sellerID, csrf) {
             // confirmButton.remove()
             clone.on("click", (e) => {
                 e.preventDefault()
-                if (confirmButton.text() == "Buy Now") {
+                //if (confirmButton.text() == "Buy Now") {
                     $("#simplemodal-container").remove()
                     makePurchase(productID, price, sellerID, CSRF_Token, 0)
                         .then((resp) => {
@@ -138,7 +138,7 @@ function makePurchase(productID, price, sellerID, csrf) {
                                 setTimeout(() => window.location.reload(), 500);
                             }
                         })
-                }
+                //}
             })
         }
     });
