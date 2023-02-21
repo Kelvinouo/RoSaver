@@ -77,7 +77,7 @@ function makePurchase(productID, price, sellerID, csrf) {
     let productID = PurchaseButton.attr("data-product-id")
     let price = PurchaseButton.attr("data-expected-price")
     let sellerID = PurchaseButton.attr("data-expected-seller-id")
-    let savedRobux = Math.floor(price * 0.4)
+    let savedRobux
 
     let imgSrc = ""
     if ($("span.thumbnail-span > img").length > 0) {
@@ -92,6 +92,8 @@ function makePurchase(productID, price, sellerID, csrf) {
     let type = ""
     if ($(".icon-limited-label").length > 0 || $(".icon-limited-unique-label").length > 0) {
         type = "limiteds"
+    } else if (window.location.href.indexOf("game-pass") > -1) {
+        type = "gamepasses"
     } else {
         type = "items"
     }
@@ -99,6 +101,12 @@ function makePurchase(productID, price, sellerID, csrf) {
     if (!storageData.placeid || rsaver_placeid == 0) {
         robuxContainer.append(`<span class="rsaver-savingRobux">(⚠ set placeid!)</span>`)
         return
+    }
+    
+    if (type == "gamepasses") {
+        savedRobux = Math.floor(price * 0.1)
+    } else {
+        savedRobux = Math.floor(price * 0.4)
     }
 
     if (type !== "limiteds") {
