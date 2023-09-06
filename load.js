@@ -28,29 +28,33 @@ async function notification(title, message) {
     })
 }
 
-function makePurchase(productID, price, sellerID, csrf) {
-    let postData = JSON.stringify({
-        expectedCurrency: 1,
-        expectedPrice: price,
-        expectedSellerId: sellerID,
-        expectedPromoId: 0,
-        userAssetId: 0,
-        saleLocationType: "Game",
-        saleLocationId: rsaver_placeid
-    })
-    return fetch(
-            `https://economy.roblox.com/v1/purchases/products/${productID}`, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": csrf,
-                    "Content-Type": "application/json"
-                },
-                credentials: "include",
-                body: postData,
-            })
-        .then((resq) => {
-            return resq.json();
-        })
+function makePurchase(productID, savedprice, type) {
+    // let postData = JSON.stringify({
+    //     expectedCurrency: 1,
+    //     expectedPrice: price,
+    //     expectedSellerId: sellerID,
+    //     expectedPromoId: 0,
+    //     userAssetId: 0,
+    //     saleLocationType: "Game",
+    //     saleLocationId: rsaver_placeid
+    // })
+    // return fetch(
+    //         `https://economy.roblox.com/v1/purchases/products/${productID}`, {
+    //             method: "POST",
+    //             headers: {
+    //                 "X-CSRF-TOKEN": csrf,
+    //                 "Content-Type": "application/json"
+    //             },
+    //             credentials: "include",
+    //             body: postData,
+    //         })
+    //     .then((resq) => {
+    //         console.log(resq)
+    //         return resq.json();
+    //     })
+
+    window.open(`roblox://placeId=${rsaver_placeid}&launchData=${productID},${savedprice},${type}`)
+    window.location.reload()
 };
 
 (async () => {
@@ -66,21 +70,27 @@ function makePurchase(productID, price, sellerID, csrf) {
 
     saveData(storageData)
 
-    let PurchaseButton = await waitForElm(".PurchaseButton")
-    PurchaseButton = $(PurchaseButton)
+    // let PurchaseButton = await waitForElm("#item-info-container-frontend > div > div.item-details-section > div.price-row-container > div > div > div.price-info.row-content > div.item-purchase-btns-container > div > button")
+    // PurchaseButton = $(PurchaseButton)
+    let requireRobux = await waitForElm(".text-robux-lg")
+    requireRobux = $(requireRobux).text()
+    let infoDiv = await waitForElm("#item-container")
+    infoDiv = $(infoDiv)
     console.log("Init RoSaver")
 
-    let requireRobux = $(".text-robux-lg")
     let robuxContainer = $(".icon-robux-price-container")
-    if (requireRobux.text() === "") return
+    if (requireRobux === "") return
 
-    let productID = PurchaseButton.attr("data-product-id")
-    let price = PurchaseButton.attr("data-expected-price")
-    let sellerID = PurchaseButton.attr("data-expected-seller-id")
+    // let productID = infoDiv.attr("data-delete-id")
+    let productID = window.location.toString().split("/")[4]
+    // if (!Number(productID)) return
+    let price = requireRobux.replace(",", "")
+    let sellerID = infoDiv.attr("data-expected-seller-id")
     let savedRobux
+    console.log(productID)
 
     let imgSrc = ""
-    if ($("span.thumbnail-span > img").length > 0) {
+    if ($("span.thumbnail-span > img").length > 0)   {
         imgSrc = $("span.thumbnail-span > img")[0].src
     }
 
@@ -93,9 +103,9 @@ function makePurchase(productID, price, sellerID, csrf) {
     if ($(".icon-limited-label").length > 0 || $(".icon-limited-unique-label").length > 0) {
         type = "limiteds"
     } else if (window.location.href.indexOf("game-pass") > -1) {
-        type = "gamepasses"
+        type = 2
     } else {
-        type = "items"
+        type = 1
     }
 
     if (!storageData.placeid || rsaver_placeid == 0) {
@@ -103,7 +113,7 @@ function makePurchase(productID, price, sellerID, csrf) {
         return
     }
     
-    if (type == "gamepasses") {
+    if (type == 2) {
         savedRobux = Math.floor(price * 0.1)
     } else {
         savedRobux = Math.floor(price * 0.4)
@@ -116,13 +126,13 @@ function makePurchase(productID, price, sellerID, csrf) {
     }
 
     $(document.body).on("click", () => {
-        if ($("#confirm-btn").length > 0) {
+        if ($("button:contains('Buy Now')").length > 0 || $("a:contains('Buy Now')").length > 0) {
             // $("#modal-dialog").css("width", "500")
-            let confirmButton = $("#confirm-btn") //decline-btn confirm-btn
+            let confirmButton = $("button:contains('Buy Now')").length > 0 ? $("button:contains('Buy Now')") : $("a:contains('Buy Now')") //decline-btn confirm-btn
 
+            if ($('*[id="confirm-btn"]').length == 2) return
             if (confirmButton.offsetParent()[0].toString() == "[object HTMLHtmlElement]") return
 
-            console.log("clone")
             let clone = confirmButton.clone()
             clone.css({
                 "background-color": "#00b06f",
@@ -136,15 +146,15 @@ function makePurchase(productID, price, sellerID, csrf) {
             clone.on("click", (e) => {
                 e.preventDefault()
                 //if (confirmButton.text() == "Buy Now") {
-                    $("#simplemodal-container").remove()
-                    makePurchase(productID, price, sellerID, CSRF_Token, 0)
+                    $("div[role='dialog']").remove()
+                    makePurchase(productID, savedRobux, type)
                         .then((resp) => {
                             console.log(resp)
-                            if (savedRobux !== 0) {
-                                notification("Saved robux from RoSaver!" ,"You saved " + savedRobux + " robux by using RoSaver!")
-                                console.log("sent!")
-                                setTimeout(() => window.location.reload(), 500);
-                            }
+                            // if (savedRobux !== 0) {
+                            //     notification("Saved robux from RoSaver!" ,"You saved " + savedRobux + " robux by using RoSaver!")
+                            //     console.log("sent!")
+                            //     // setTimeout(() => window.location.reload(), 500);
+                            // }
                         })
                 //}
             })
