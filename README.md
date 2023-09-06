@@ -21,7 +21,7 @@ YouTube Tutorial : https://www.youtube.com/watch?v=kNCNoVtIv-o
 
 ## Instructions:
 1. Create a group (you can use a old group if you already had one)
-2. Create a game owned by the group and save the placeid
+2. Go to this [Game](https://www.roblox.com/games/12166926114/RoSaver-Default-Place) and click *Edit in studio* and click *Settings* and make sure to publish to your **Own Group**, the 40% method will not work if you forgot to do this
 3. Click on extensions icon
 4. Enter the placeid in textbox and click save
 5. Go to any item purchasing page (if it showing 💰 emoji after the price that mean it will work on this item)
