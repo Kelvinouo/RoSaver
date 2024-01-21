@@ -126,11 +126,13 @@ function makePurchase(productID, savedprice, type) {
     }
 
     $(document.body).on("click", () => {
-        if ($("button:contains('Buy Now')").length > 0 || $("a:contains('Buy Now')").length > 0) {
+        if ($(`.text-robux`).length > 0) {
             // $("#modal-dialog").css("width", "500")
-            let confirmButton = $("button:contains('Buy Now')").length > 0 ? $("button:contains('Buy Now')") : $("a:contains('Buy Now')") //decline-btn confirm-btn
+            let confirmButton = $(".modal-button.btn-primary-md.btn-min-width").length > 0 ? $(".modal-button.btn-primary-md.btn-min-width") : $("#confirm-btn") //decline-btn confirm-btn
 
-            if ($('*[id="confirm-btn"]').length == 2) return
+            if (!confirmButton) return
+            if ($('.modal-button.btn-primary-md.btn-min-width').length == 2) return
+            if ($('#confirm-btn').hasClass("rsaver")) return
             if (confirmButton.offsetParent()[0].toString() == "[object HTMLHtmlElement]") return
 
             let clone = confirmButton.clone()
