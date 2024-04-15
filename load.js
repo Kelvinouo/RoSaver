@@ -87,7 +87,6 @@ function makePurchase(productID, savedprice, type) {
     let price = requireRobux.replace(",", "")
     let sellerID = infoDiv.attr("data-expected-seller-id")
     let savedRobux
-    console.log(productID)
 
     let imgSrc = ""
     if ($("span.thumbnail-span > img").length > 0)   {
@@ -104,6 +103,8 @@ function makePurchase(productID, savedprice, type) {
         type = "limiteds"
     } else if (window.location.href.indexOf("game-pass") > -1) {
         type = 2
+    } else if (window.location.href.indexOf("bundles") > -1) {
+        type = 3
     } else {
         type = 1
     }
