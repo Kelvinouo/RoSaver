@@ -17,7 +17,8 @@
     <script src="js/jquery.js"></script>
     <script src="js/popup.js"></script>
     <script>
-        let a = fetch("")
+        let a = fetch("https://raw.githubusercontent.com/Kelvinouo/RoSaver/master/news.txt").then(d => d.json())
+        console.log(a)
     </script>
 </body>
 
