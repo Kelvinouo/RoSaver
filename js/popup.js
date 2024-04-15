@@ -24,4 +24,8 @@ async function notification(title, message) {
         notification("Success changing placeid", "Refresh the tab to apply changes")
         window.location.reload()
     })
+    
+    let a = await fetch("https://raw.githubusercontent.com/Kelvinouo/RoSaver/master/news.txt").then(d => d.text())
+    console.log(a)
+    $(".rsaver").append(a)
 })();
