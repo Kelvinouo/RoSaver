@@ -1,3 +1,6 @@
+<iframe width="560" height="315" src="https://www.youtube.com/embed/icx6SWPOPQ4?si=3nwIrPJjAugmzyVS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br>
+<br>
 Interested on sniping youtubers/anyone?
 <br>
 Try out my other project in <a href="https://discord.gg/frrQSPVajK">Simuna.land</a> !
