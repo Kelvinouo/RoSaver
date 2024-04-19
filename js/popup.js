@@ -26,7 +26,6 @@ async function notification(title, message) {
     })
 
     let a = await fetch("https://raw.githubusercontent.com/Kelvinouo/RoSaver/master/news.txt").then(d => d.text())
-    console.log(a)
     $(".rsaver").append(a)
 
     $("#simuna").on("click", () => {
