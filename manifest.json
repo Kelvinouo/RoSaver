@@ -4,7 +4,7 @@
     "default_popup": "popup.html"
   },
   "manifest_version": 3,
-  "version": "0.191",
+  "version": "0.192",
   "description": "Save your robux from purchasing items!",
   "icons": {
     "16": "images/icon16.png",
