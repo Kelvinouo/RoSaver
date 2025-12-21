@@ -1,4 +1,4 @@
 Please note that you need to transfer your group ownership to your alt account and purchase items in your main account to work with the new update.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/icx6SWPOPQ4?si=xIqkxpsWTil58Mkq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/icx6SWPOPQ4?si=he9vwio8-StmNAQe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <br>
 <a id="discord" href="https://discord.gg/Bc2yG4Ea52">RoSaver Discord Support Server</a>
